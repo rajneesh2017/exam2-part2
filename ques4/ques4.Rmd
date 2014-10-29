@@ -1,0 +1,25 @@
+R markdown file for plotting two graphs.
+
+```{r}
+library(ggplot2)
+datafile <- RCurl::getURL ("https://raw.githubusercontent.com/jrwolf/IT497/master/databreaches.csv")
+df <- read.table(textConnection(datafile),sep = ",",header = TRUE)
+
+df2 <- subset(df , df$YEAR >= "2008")
+
+```
+
+```{r}
+library(ggplot2)
+ggplot(df2, aes(factor(df2$YEAR))) + geom_bar()+ xlab("Year") + ylab("Breach")
+```
+
+
+Caption: The 1st graph tells thatthe most breaches were in the year 2010 . The least number of breaches are in the year 2014. In the year 2009 and 2011, there were same number of breaches.
+```{r, fig.width=7, fig.height=7}
+ggplot(df2,aes(x= METHOD, fill= as.factor(df2$YEAR))) + geom_bar() + ylab("BREACHES")
+```
+
+
+Caption: In this graph, hacking is the reason for most of the breaches. 
+
